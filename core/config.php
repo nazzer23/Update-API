@@ -1,6 +1,7 @@
 <?php
 class Configuration {
     const registerDisabled = false;
+    const maintenance = true;
     
     const dbHost = "db772896706.hosting-data.io";
     const dbUser = "dbo772896706";

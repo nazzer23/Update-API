@@ -14,6 +14,12 @@ if(isset($_POST['strEmail']) && isset($_POST['strPassword'])) {
     $hash = $functions->encryptPassword($email, $password);
     if($database->getNumberOfRows("SELECT * FROM users WHERE Email LIKE '{$email}' AND Password='{$hash}'") > 0) {
         $userData = $database->fetchObject("SELECT * FROM users WHERE Email LIKE '{$email}' AND Password='{$hash}'");
+        if(Configuration::maintenance && $userData->Access < 2) {
+            $array = array(
+                "status" => false,
+                "message" => "Update is down for maintenance"
+            );
+        } else
         if($userData->Access == 0) {
             $array = array(
                 "status" => false,
