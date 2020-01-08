@@ -33,8 +33,12 @@ class Functions {
         return implode('', $pieces);
     }
 
-    public function getUserDataFromSession($sessionString) {
-        $userQuery = $this->database->executeQuery("SELECT * FROM users INNER JOIN users_sessions ON users.UserID = users_sessions.UserID WHERE users_sessions.SessionString='{$sessionString}' AND users_sessions.Valid=1");
+    public function checkSessionString($userID, $sessionString) {
+
+    }
+
+    public function getUserDataFromSession($userID,$sessionString) {
+        $userQuery = $this->database->executeQuery("SELECT * FROM users INNER JOIN users_sessions ON users.UserID = users_sessions.UserID WHERE users_sessions.SessionString='{$sessionString}' AND users_sessions.UserID = '{$userID}' AND users_sessions.Valid=1");
         if($userQuery->num_rows <= 0) {
             return false;
         } else {

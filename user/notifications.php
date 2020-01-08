@@ -3,15 +3,14 @@ header("Content-Type: application/json");
 require "../core/global.inc.php";
 $global = new GlobalHandler(false);
 
-$template = $global->template;
 $database = $global->db;
 $functions = $global->functions;
 
-if(isset($_POST['sessionString'])) {
-    if($functions->getUserDataFromSession($_POST['sessionString']) == false) {
-		http_response_code(500);
+if(isset($_POST['sessionString']) && isset($_POST['userID'])) {
+    if($functions->getUserDataFromSession($_POST['userID'], $_POST['sessionString']) == false) {
+		http_response_code(403);
     } else {
-		$userData = $functions->getUserDataFromSession($_POST['sessionString']);
+		$userData = $functions->getUserDataFromSession($_POST['userID'], $_POST['sessionString']);
         echo json_encode(
             array(
                 "notifCount" => $database->getNumberOfRows("SELECT * FROM users_notifications WHERE UserID='{$userData->UserID}' AND ReadNotif=0"),
@@ -21,6 +20,6 @@ if(isset($_POST['sessionString'])) {
             , JSON_UNESCAPED_SLASHES);
     }
 } else {
-    http_response_code(500);
+    http_response_code(403);
 }
 ?>

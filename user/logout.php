@@ -7,9 +7,9 @@ $template = $global->template;
 $database = $global->db;
 $functions = $global->functions;
 
-if(isset($_POST['sessionString'])) {
-    if($functions->getUserDataFromSession($_POST['sessionString']) == false) {
-		http_response_code(500);
+if(isset($_POST['sessionString']) && isset($_POST['userID'])) {
+    if($functions->getUserDataFromSession($_POST['userID'],$_POST['sessionString']) == false) {
+		http_response_code(403);
     } else {
 		$userData = $functions->getUserDataFromSession($_POST['sessionString']);
 		
@@ -24,6 +24,6 @@ if(isset($_POST['sessionString'])) {
             , JSON_UNESCAPED_SLASHES);
     }
 } else {
-    http_response_code(500);
+    http_response_code(403);
 }
 ?>
