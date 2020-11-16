@@ -3,9 +3,9 @@ class Configuration {
     const registerDisabled = false;
     const maintenance = true;
     
-    const dbHost = "db772896706.hosting-data.io";
-    const dbUser = "dbo772896706";
-    const dbPass = "x.5qe3FdWRVu-k2";
-    const dbName = "db772896706";
+    const dbHost = "127.0.0.1";
+    const dbUser = "update";
+    const dbPass = "12345678";
+    const dbName = "update";
 }
 ?>
